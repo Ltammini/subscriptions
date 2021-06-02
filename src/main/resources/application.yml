@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  h2:
+    console:
+      enabled:  true
+  datasource:
+     url:  jdbc:h2:mem:filmlanddb
+  data:
+    jpa:
+      repositories: bootstrap-mode=default
+server:
+  port: 8000
+  error:
+    include-message: always
+jwt:
+  secret: itssecretdonttellanyone
