@@ -17,11 +17,22 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
+    /**
+     *
+     * @param subscribeDto
+     * @return message subscription is success or failed
+     */
     @PostMapping
     public ResponseEntity<?> subscribeCategory(@RequestBody SubscribeDto subscribeDto){
         subscriptionService.addSubscription(subscribeDto);
         return ResponseEntity.ok("Your subscription to "+subscribeDto.getName()+" is successful");
     }
+
+    /**
+     *
+     * @param sharedSubscriptionDto
+     * @return message stating sharing category is success or failed
+     */
     @PostMapping("/share")
     public ResponseEntity<?> subscribeCategory(@RequestBody SharedSubscriptionDto sharedSubscriptionDto){
         subscriptionService.shareSubscription(sharedSubscriptionDto);

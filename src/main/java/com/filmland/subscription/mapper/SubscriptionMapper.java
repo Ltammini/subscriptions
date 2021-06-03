@@ -15,6 +15,11 @@ public class SubscriptionMapper {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     * @param partnerCustomerId
+     * @param originalSubscription
+     * @return
+     */
     public Subscription buildSharedSubscription(Long partnerCustomerId, Subscription originalSubscription) {
         return Subscription.builder()
                 .customerId(partnerCustomerId)
@@ -26,6 +31,11 @@ public class SubscriptionMapper {
                 .build();
     }
 
+    /**
+     * @param customerId
+     * @param subscribeDto
+     * @return
+     */
     public Subscription mapSubscription(Long customerId, SubscribeDto subscribeDto) {
         Category category = categoryService.getCategoryByName(subscribeDto.getName());
         return Subscription.builder()

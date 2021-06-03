@@ -18,6 +18,12 @@ public class CustomerService implements UserDetailsService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    /**
+     * Overriding method from UserDetailsService to get customer email and password
+     * @param username
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws NotFoundException {
         Optional<Customer> optionalCustomer = findCustomerByEmail(username);
@@ -28,6 +34,11 @@ public class CustomerService implements UserDetailsService {
         throw new NotFoundException("Customer not found with username: " + username);
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public Optional<Customer> findCustomerByEmail(String user) {
         return Optional.ofNullable(customerRepository.findOneByEmail(user));
     }

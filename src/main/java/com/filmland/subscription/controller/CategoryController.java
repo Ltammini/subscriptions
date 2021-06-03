@@ -12,6 +12,11 @@ public class CategoryController {
     @Autowired
     private  CategoryService categoryService;
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @GetMapping
     public AllCategoriesDto getCategory(@RequestParam("username") String username){
         return categoryService.getCategories(username);

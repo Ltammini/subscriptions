@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AuthenticationService {
 
@@ -21,12 +22,25 @@ public class AuthenticationService {
     @Autowired
     private  CustomerService customerService;
 
+    /**
+     *
+     * @param userId
+     * @param password
+     * @return
+     * @throws Exception
+     */
     public String getToken(String userId, String password) throws Exception{
         authenticate(userId, password);
         final UserDetails userDetails = customerService.loadUserByUsername(userId);
         return jwtTokenUtil.generateToken(userDetails);
     }
 
+    /**
+     *
+     * @param userId
+     * @param password
+     * @throws Exception
+     */
     private void authenticate(String userId, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userId, password));

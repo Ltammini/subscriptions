@@ -14,6 +14,12 @@ public class LoginController {
     @Autowired
     private  AuthenticationService authenticationService ;
 
+    /**
+     *
+     * @param userDto
+     * @return
+     * @throws Exception
+     */
     @PostMapping
     public ResponseEntity<?> login(@RequestBody UserDto userDto) throws Exception {
         return ResponseEntity.ok(authenticationService.getToken(userDto.getUserId(), userDto.getPassword()));

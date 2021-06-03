@@ -28,6 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    /**
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customerService).passwordEncoder(passwordEncoder());
@@ -49,9 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new SubscriptionAuthenticationEntryPoint();
     }
 
+    /**
+     * @param httpSecurity  as login service is the entry point to generate new token disabled http security
+     * @throws Exception
+     * and making sure that stateless session policy is set
+     */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
+                //NOTE:  "/h2-console/*", "/swagger-ui*" are only for dev environment
                 .authorizeRequests().antMatchers("/login", "/h2-console/*").permitAll()
 				.anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(subscriptionAuthenticationEntryPoint())

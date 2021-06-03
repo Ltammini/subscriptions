@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
 @Component
 public class CategoriesMapper {
 
+    /**
+     *
+     * @param available
+     * @param subscribed
+     * @return
+     */
     public AllCategoriesDto mapSubscribedCategories(List<Category> available, List<Subscription> subscribed) {
         return AllCategoriesDto.builder()
                 .availableCategories(available.stream().map(this::mapAvailableCategories).collect(Collectors.toList()))
@@ -20,6 +26,10 @@ public class CategoriesMapper {
                 .build();
     }
 
+    /**
+     * @param subscription
+     * @return
+     */
     private SubscribedCategoryDto mapSubscribedCategories(Subscription subscription) {
         SubscribedCategoryDto subscribedCategoryDto = SubscribedCategoryDto.builder().build();
         subscribedCategoryDto.setName(subscription.getName());
@@ -30,6 +40,10 @@ public class CategoriesMapper {
 
     }
 
+    /**
+     * @param category
+     * @return
+     */
     private AvailableCategoryDto mapAvailableCategories(Category category) {
         AvailableCategoryDto categoryDto = AvailableCategoryDto.builder().build();
         categoryDto.setName(category.getName());

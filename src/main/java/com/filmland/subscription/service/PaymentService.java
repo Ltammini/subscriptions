@@ -16,6 +16,10 @@ public class PaymentService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
 
+    /**
+     * Creates payment request object by fetching subscriptions
+     * and creating mapping between customer ID and and sum of prices from subscriptions
+     */
     public void createPaymentRequests() {
         List<Subscription> subscriptions = subscriptionRepository.findAllByStartDateAfter(LocalDateTime.now().minusMonths(1));
         Map<Long, Double> payments = subscriptions.stream().collect(

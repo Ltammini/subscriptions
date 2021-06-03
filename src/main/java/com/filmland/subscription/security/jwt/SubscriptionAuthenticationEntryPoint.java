@@ -13,6 +13,13 @@ public class SubscriptionAuthenticationEntryPoint implements AuthenticationEntry
 
 	private static final long serialVersionUID = -7858869558953243875L;
 
+	/**
+	 *
+	 * @param request
+	 * @param response
+	 * @param authException
+	 * @throws IOException
+	 */
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {

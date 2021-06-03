@@ -32,6 +32,11 @@ public class CategoryService {
     private CategoriesMapper categoriesMapper;
 
 
+    /**
+     * Fetches both subscribe and unsubscribed list and mapps to response dto
+     * @param username
+     * @return
+     */
     public AllCategoriesDto getCategories(String username) {
         Optional<Customer> customer = Optional.ofNullable(customerRepository.findOneByEmail(username));
         if (customer.isPresent()) {
@@ -46,6 +51,11 @@ public class CategoryService {
          return categoryRepository.findByName(name);
     }
 
+    /**
+     * Filters categories which are already subscribed
+     * @param subscribed
+     * @return
+     */
     private List<Category> getAvailableCategories(List<Subscription> subscribed) {
         List<String> subscribedCategories = subscribed.stream()
                 .map(Subscription::getName)
